@@ -1,0 +1,56 @@
+# --- Node / npm ---
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json.*    # behåll package-lock.json (inte ignorera!), men ignorera ev. backupfiler
+
+# --- Byggartefakter / bundling ---
+dist/
+out/
+build/
+*.map
+
+# electron-builder outputs (plattformar & unpacked-mappar)
+*.AppImage
+*.dmg
+*.exe
+*.snap
+*.deb
+*.rpm
+win-unpacked/
+linux-unpacked/
+mac/
+*.blockmap
+latest*.yml
+
+# --- Cache / temp ---
+.cache/
+.tmp/
+.temp/
+.eslintcache
+.vscode/**/*
+!.vscode/extensions.json   # tillåt delade rekommendationer om du vill
+!.vscode/settings.json     # (valfritt) om du vill dela projektinställningar
+
+# --- Miljöfiler / hemligheter ---
+.env
+.env.*            # .env.local, .env.production, etc.
+
+# --- OS-specifika skräpfiler ---
+.DS_Store
+**/.DS_Store
+Thumbs.db
+Desktop.ini
+
+# --- IDE-projektmappar ---
+.idea/
+*.iml
+
+# --- Test/coverage (om du lägger till tester) ---
+coverage/
+.nyc_output/
+
+# --- Lokala verktyg/build-scripts (om du genererar temporärt) ---
+scripts/tmp/

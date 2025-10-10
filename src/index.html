@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8" />
+  <title>WS Pastebin</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta http-equiv="Content-Security-Policy"
+        content="
+          default-src 'self';
+          img-src 'self' data:;
+          style-src 'self' 'unsafe-inline';
+          script-src 'self' https://cdn.socket.io;
+          connect-src 'self'
+                       https://websocket-uxhx.onrender.com
+                       https://virtualboard-438y.onrender.com
+                       wss://websocket-uxhx.onrender.com;
+        ">
+  <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body>
+  <main>
+    <header class="card" style="display:flex;align-items:center;justify-content:space-between;">
+      <h1 style="margin:0;">
+        WS Pastebin
+        <span id="status" class="status status--disconnected">disconnected</span>
+      </h1>
+      <div class="btn-row">
+        <button id="reconnect" class="btn">Reconnect</button>
+        <button id="logout" class="btn btn-danger">Logout</button>
+      </div>
+    </header>
+
+    <section class="card">
+      <h3 style="margin-top:0;">Login (hämta nya tokens)</h3>
+      <div class="grid grid-3">
+        <input id="loginUser" class="input" placeholder="Användarnamn" />
+        <input id="loginPass" class="input" type="password" placeholder="Lösenord" />
+        <button id="loginBtn" class="btn btn-primary">Hämta tokens</button>
+      </div>
+      <div id="loginMsg" class="muted" style="margin-top:6px;"></div>
+    </section>
+
+    <section class="card">
+      <div class="grid grid-3 align-end">
+        <div class="input-group">
+          <label for="apiKey">api_key (access token)</label>
+          <div class="input-with-actions">
+            <input id="apiKey" class="input" type="password" placeholder="••••••••••••" />
+            <button id="toggleApi" class="icon-btn" title="Visa/Dölj">👁️</button>
+            <button id="copyApi" class="icon-btn" title="Kopiera">📋</button>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button id="save" class="btn">Spara</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <textarea id="text" class="textarea" placeholder="Klistra/skriv text här…" rows="8"></textarea>
+      <div class="btn-row" style="margin-top:.5rem;">
+        <button id="send" class="btn btn-primary">Skicka</button>
+        <button id="clear" class="btn">Rensa</button>
+        <button id="copy" class="btn">Kopiera till urklipp</button>
+        <button id="paste" class="btn">Klistra in från urklipp</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h3 style="margin-top:0;">Logg</h3>
+      <div id="log"></div>
+    </section>
+  </main>
+
+  <div id="toast"></div>
+
+  <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>

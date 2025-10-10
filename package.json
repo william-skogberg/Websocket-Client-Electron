@@ -1,0 +1,55 @@
+{
+  "name": "ws-pastebin-electron",
+  "version": "1.0.0",
+  "description": "WS Pastebin – desktop client (Electron)",
+  "license": "MIT",
+  "author": "You",
+  "main": "main.js",
+  "type": "commonjs",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development electron .",
+    "start": "electron .",
+    "build": "electron-builder"
+  },
+  "dependencies": {
+    "electron-store": "^9.0.0",
+    "socket.io-client": "^4.7.5"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "electron": "^31.2.0",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.yourname.ws-pastebin",
+    "productName": "WS Pastebin",
+    "files": [
+      "main.js",
+      "preload.js",
+      "src/**/*",
+      "dist/**/*",
+      "package.json"
+    ],
+    "asar": true,
+    "directories": {
+      "buildResources": "assets"
+    },
+    "mac": {
+      "category": "public.app-category.productivity",
+      "target": [
+        "dmg"
+      ]
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "category": "Utility"
+    }
+  }
+}
