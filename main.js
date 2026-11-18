@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Menu, shell, ipcMain, safeStorage } = require('electron');
+const { app, BrowserWindow, Menu, shell, ipcMain, safeStorage, clipboard } = require('electron');
 const fs = require('fs');
 const path = require('path');
 const storeKeys = new Set(['api_key', 'refresh_token']);
@@ -18,6 +18,9 @@ function saveStore(data) {
   fs.mkdirSync(path.dirname(storeFile()), { recursive: true });
   fs.writeFileSync(storeFile(), JSON.stringify(data), { mode: 0o600 });
 }
+
+ipcMain.handle('clipboard-read', () => clipboard.readText());
+ipcMain.handle('clipboard-write', (_event, value) => { clipboard.writeText(String(value || '')); });
 
 ipcMain.on('session-store', (event, action, key, value) => {
   if (!storeKeys.has(key)) { event.returnValue = null; return; }
