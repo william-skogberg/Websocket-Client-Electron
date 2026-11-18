@@ -1,6 +1,4 @@
-const { contextBridge, clipboard } = require('electron');
-
-const memoryStore = new Map();
+const { contextBridge, clipboard, ipcRenderer } = require('electron');
 
 contextBridge.exposeInMainWorld('electron', {
   clipboard: {
@@ -8,9 +6,9 @@ contextBridge.exposeInMainWorld('electron', {
     writeText: async (t) => clipboard.writeText(String(t || ''))
   },
   store: {
-    get: (k) => memoryStore.get(k),
-    set: (k, v) => memoryStore.set(k, v),
-    delete: (k) => memoryStore.delete(k)
+    get: (key) => ipcRenderer.sendSync('session-store', 'get', key),
+    set: (key, value) => ipcRenderer.sendSync('session-store', 'set', key, value),
+    delete: (key) => ipcRenderer.sendSync('session-store', 'delete', key)
   },
   env: { isElectron: true }
 });
