@@ -1,9 +1,9 @@
-const { contextBridge, clipboard, ipcRenderer } = require('electron');
+const { contextBridge, ipcRenderer } = require('electron');
 
 contextBridge.exposeInMainWorld('electron', {
   clipboard: {
-    readText: async () => clipboard.readText(),
-    writeText: async (t) => clipboard.writeText(String(t || ''))
+    readText: async () => ipcRenderer.invoke('clipboard-read'),
+    writeText: async (t) => ipcRenderer.invoke('clipboard-write', String(t || ''))
   },
   store: {
     get: (key) => ipcRenderer.sendSync('session-store', 'get', key),
