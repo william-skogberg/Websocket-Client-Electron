@@ -21,13 +21,13 @@
     "electron-builder": "^24.13.3"
   },
   "build": {
-    "appId": "com.yourname.ws-pastebin",
+    "appId": "fi.arcada.ws-pastebin",
     "productName": "WS Pastebin",
     "files": [
       "main.js",
       "preload.js",
       "src/**/*",
-      "dist/**/*",
+
       "package.json"
     ],
     "asar": true,
