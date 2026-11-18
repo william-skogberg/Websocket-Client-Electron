@@ -1,15 +1,12 @@
-appId: com.yourname.ws-pastebin
+appId: fi.arcada.ws-pastebin
 productName: WS Pastebin
 files:
-  - dist/**/*
+  - src/**/*
   - main.js
   - preload.js
   - package.json
 directories:
   buildResources: assets
-extraResources:
-  - from: assets
-    to: assets
 asar: true
 mac:
   category: public.app-category.productivity
